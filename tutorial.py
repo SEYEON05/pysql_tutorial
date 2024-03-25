@@ -57,7 +57,7 @@ class ActorCRUD:
       print('database was closed.')
 
 
-actor_crud = ActorCRUD(dbname = 'testdb', user='postgres', password='')
+actor_crud = ActorCRUD()
 actor_id = actor_crud.create_actor('Olivia', 'rendler')
 # actor_crud.read_actor(35)
 actor_crud.update_actor('Mickey', 'Mouse', 'Thora', 'Temple')
