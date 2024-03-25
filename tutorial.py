@@ -48,8 +48,15 @@ class ActorCRUD:
       self.conn.commit()
       print(f"배우 {first_name} {last_name}의 정보가 {rfirst_name} {rlast_name}로 업데이트 됨.")
   
-  def delete_actor(self):
-    pass
+  def delete_actor(self, actor_id):
+    with self.conn.cursor() as cur:
+      try:
+        cur.execute(f"""
+            DELETE FROM actor WHERE actor_id = ({actor_id});""")
+        self.conn.commit()
+        print(f"{actor_id}번 배우의 정보가 삭제됨.")
+      except:
+        print("데이터 삭제 시 오류 발생")
   
   def close(self):
     if self.conn:
@@ -58,6 +65,7 @@ class ActorCRUD:
 
 
 actor_crud = ActorCRUD()
-actor_id = actor_crud.create_actor('Olivia', 'rendler')
+# actor_id = actor_crud.create_actor('Olivia', 'rendler')
 # actor_crud.read_actor(35)
-actor_crud.update_actor('Mickey', 'Mouse', 'Thora', 'Temple')
+actor_crud.delete_actor(22)
+# actor_crud.update_actor('Mickey', 'Mouse', 'Thora', 'Temple')
