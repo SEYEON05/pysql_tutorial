@@ -64,8 +64,11 @@ class ActorCRUD:
           select title from film
           order by random()
           fetch first 3 row only;""")
-      title = cur.fetchone()
-      return title
+      titles = cur.fetchall()
+      title_list = []
+      for title in titles:
+        title_list.append(title[0])
+      return title_list
 
 
   def close(self):
