@@ -58,6 +58,16 @@ class ActorCRUD:
       except:
         print("데이터 삭제 시 오류 발생")
   
+  def recommendation(self):
+    with self.conn.cursor() as cur:
+      cur.execute(f"""
+          select title from film
+          order by random()
+          fetch first 3 row only;""")
+      title = cur.fetchone()
+      return title
+
+
   def close(self):
     if self.conn:
       self.conn.close()
@@ -67,5 +77,7 @@ class ActorCRUD:
 actor_crud = ActorCRUD()
 # actor_id = actor_crud.create_actor('Olivia', 'rendler')
 # actor_crud.read_actor(35)
-actor_crud.delete_actor(22)
+# actor_crud.delete_actor(22)
 # actor_crud.update_actor('Mickey', 'Mouse', 'Thora', 'Temple')
+print(actor_crud.recommendation())
+
